@@ -66,7 +66,7 @@ def process(lang, codec, random_seed=True):
 @click.command()
 @click.option('--random-seed/--no-random-seed', default=True)
 @click.option('--lang', default="FR", help='Language')
-@click.option('--codec', default="ISO-8859-1", help='Codec')
+@click.option('--codec', default="utf8", help='Codec')
 def main(lang, codec, random_seed):
     if random_seed:
         print("Using a truly random seed")
