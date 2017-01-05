@@ -25,13 +25,14 @@ def process(lang, codec, random_seed=True):
     probafile = os.path.join("counts", "%s.bin" % lang)
 
     dico = []
-    with codecs.open(filepath, "r", "ISO-8859-1") as lines:
+    with codecs.open(filepath, "r", "utf8") as lines:
         for l in  lines:
             dico.append(l[:-1])
 
     count = np.fromfile(probafile, dtype="int32").reshape(256,256,256)
 
     s = count.sum(axis=2)
+    np.seterr(divide='ignore', invalid='ignore')
     st = np.tile(s.T, (256,1,1)).T
     p = count.astype('float') / st
     p[np.isnan(p)] = 0
@@ -59,7 +60,7 @@ def process(lang, codec, random_seed=True):
                     if res[:-1] in dico:
                         x = res[:-1] + "*"
                     total += 1
-                    print(x)
+                    print(x.encode('utf8'))
                     f.write(x + "\n")
 
 @click.command()

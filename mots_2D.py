@@ -13,7 +13,7 @@ def lang_count(lang):
     count = np.zeros((256,256,256), dtype='int32')
     res = []
 
-    with codecs.open(filepath, "r", "ISO-8859-1") as lines:
+    with codecs.open(filepath, "r", "utf8") as lines:
         for l in  lines:
             # Split on white space or open parenthesis and keep the first string
             l2 = re.split("[ ,\(]", l)[0]
